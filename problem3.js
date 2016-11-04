@@ -1,6 +1,3 @@
-//largest prime factor
-//600851475143
-
 const largestPrimeFactor = (number)=>{
   let answer
   let largestPossibleAnswer = Math.floor(Math.sqrt(number))
