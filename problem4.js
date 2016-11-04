@@ -15,8 +15,8 @@ const largestPalindrome = ()=>{
 const isPalindrome = (number)=>{
   let bool = false
   let backwords = number.toString().split('').reverse().join('')
+  
   if(number+'' === backwords) bool = true
-
 
   return bool
 }
