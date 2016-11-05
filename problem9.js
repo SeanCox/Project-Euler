@@ -4,6 +4,7 @@ const pythagoreanTriplet = (total)=>{
       for(let c = 1; c < total; c++){
         if(a*a + b*b === c*c && a+b+c === total){
           console.log(a,b,c)
+          console.log(a*b*c)
           return a*b*c
         }
       }
