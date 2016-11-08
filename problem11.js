@@ -7,29 +7,15 @@ const createMatrix = (gridString)=>{
   })
 }
 
-const checkRight = (matrix, row, col, length, direction)=>{
-  if(direction === 'r')
+const checkDirection = (matrix, row, col, length, direction)=>{
+  let multiplyer = 1
   let output = 1
   while(length){
-    output *= matrix[row][col+length-1]
-    length--
-  }
-  return output
-}
-
-const checkDown = (matrix, row, col, length)=>{
-  let output = 1
-  while(length){
-    if(matrix[row+length-1])output *= matrix[row+length-1][col]
-    length--
-  }
-  return output
-}
-
-const checkRightDown = (matrix, row, col, length)=>{
-  let output = 1
-  while(length){
-    if(matrix[row+length-1])output *= matrix[row+length-1][col+length-1]
+  if(direction === 'r') multiplyer = matrix[row][col+length-1]
+  if(direction === 'd' && matrix[row+length-1]) multiplyer = matrix[row+length-1][col]
+  if(direction === 'rd' && matrix[row+length-1]) multiplyer = matrix[row+length-1][col+length-1]
+  if(direction === 'ld' && matrix[row+length-1]) multiplyer = matrix[row+length-1][col-length-1]
+    output *= multiplyer
     length--
   }
   return output
@@ -40,12 +26,14 @@ const largestProductInGrid = (gridString, length)=>{
   matrix = createMatrix(gridString)
   matrix.forEach((set, row)=>{
     set.forEach((number, col)=>{
-      const right = checkRight(matrix, row, col, length)
+      const right = checkDirection(matrix, row, col, length, 'r')
       if(right > answer) answer = right
-      const down = checkDown(matrix, row, col, length)
+      const down = checkDirection(matrix, row, col, length, 'd')
       if(down > answer) answer = down
-      const rightDown = checkRightDown(matrix, row, col, length)
-      if(rightDown > answer) answer = down
+      const rightDown = checkDirection(matrix, row, col, length, 'rd')
+      if(rightDown > answer) answer = rightDown
+      const leftDown = checkDirection(matrix, row, col, length, 'ld')
+      if(leftDown > answer) answer = leftDown
     })
   })
   console.log(answer)
